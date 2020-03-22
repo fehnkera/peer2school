@@ -66,7 +66,8 @@ export default {
       sendPointOutInfo(this.pointsOutState)
     },
 
-    callUp(){
+    callUpFunc(){
+      console.log("DEBUG callUpFunc")
       let pic = this.$refs.pointPic
       pic.style.backgroundColor = ""
       this.pointsOut = false

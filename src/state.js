@@ -37,7 +37,6 @@ webrtc.on('status', info => {
 
 webrtc.on('chat', msg => {
   state.chat.push(msg)
-  sendCallUpInfo(state.pointOuts[0])
 })
 
 webrtc.on('whiteboard', ({ action }) => {
@@ -59,15 +58,17 @@ webrtc.on('point_out', pointsOut => {
 })
 
 webrtc.on('call_up', callUp => {
-  const calledUpIndex = state.pointOuts.indexOf(callUp.calledUpId)
+  console.log("DEBUG on.call_up")
+  const calledUpIndex = state.pointOuts.indexOf(callUp.calledUp)
 
   if(calledUpIndex >= 0) //check if sender is in list
     state.pointOuts.splice(calledUpIndex, 1)
 
   // checks if I am the called up user
-  if(webrtc.io.id == callUp.calledUpId){
+  if(webrtc.io.id == callUp.calledUp){
     //TODO give to chat
-    callUp()
+    callUpFunc()
+    console.log("DEBUG callUpFunc()")
   }
 })
 
@@ -144,6 +145,9 @@ export function sendChatMessage(msg) {
     sender: webrtc.io.id,
     msg,
   })
+
+  console.log("DEBUG sendChatMessage")
+  sendCallUpInfo(state.pointOuts[0])
 }
 
 export function sendPointOutInfo(pointsOutInfo) {
@@ -176,11 +180,11 @@ export function sendCallUpInfo(calledUpId) {
       calledUp: calledUpId,
     })
 
-    
+    console.log("DEBUG function sendCallUpInfo(calledUpId)")
     // local
     const calledUpIndex = state.pointOuts.indexOf(calledUpId)
 
-    if(senderIndex >= 0) //check if sender is in list
+    if(calledUpIndex >= 0) //check if sender is in list
       state.pointOuts.splice(calledUpIndex, 1)
 }
 
