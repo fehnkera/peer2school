@@ -65,6 +65,13 @@ export default {
 
       sendPointOutInfo(this.pointsOutState)
     },
+
+    callUp(){
+      let pic = this.$refs.pointPic
+      pic.style.backgroundColor = ""
+      this.pointsOut = false
+
+    },
   },
   async mounted() {
 
