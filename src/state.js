@@ -57,6 +57,18 @@ webrtc.on('point_out', pointsOut => {
   }
 })
 
+webrtc.on('call_up', callUp => {
+  const calledUpIndex = state.pointOuts.indexOf(callUp.calledUpId)
+
+  if(calledUpIndex >= 0) //check if sender is in list
+    state.pointOuts.splice(calledUpIndex, 1)
+
+  // checks if I am the called up user
+  if(webrtc.io.id == callUp.calledUpId){
+    //TODO give to chat
+  }
+})
+
 webrtc.on('connected', ({ peer }) => {
   setTimeout(() => {
     peer.addStream(state.stream)
