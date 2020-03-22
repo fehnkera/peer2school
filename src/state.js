@@ -37,7 +37,6 @@ webrtc.on('status', info => {
 
 webrtc.on('chat', msg => {
   state.chat.push(msg)
-  sendCallUpInfo(state.pointOuts[0])
 })
 
 webrtc.on('whiteboard', ({ action }) => {
@@ -61,7 +60,7 @@ webrtc.on('point_out', pointsOut => {
 webrtc.on('call_up', callUp => {
   const calledUpIndex = state.pointOuts.indexOf(callUp.calledUpId)
 
-  if(calledUpIndex >= 0) //check if sender is in list
+  if(calledUpIndex >= 0) //check if called up is in list
     state.pointOuts.splice(calledUpIndex, 1)
 
   // checks if I am the called up user
@@ -143,6 +142,8 @@ export function sendChatMessage(msg) {
     sender: webrtc.io.id,
     msg,
   })
+  sendCallUpInfo(state.pointOuts[0])
+  console.log(state.pointOuts)
 }
 
 export function sendPointOutInfo(pointsOutInfo) {
@@ -179,7 +180,7 @@ export function sendCallUpInfo(calledUpId) {
     // local
     const calledUpIndex = state.pointOuts.indexOf(calledUpId)
 
-    if(senderIndex >= 0) //check if sender is in list
+    if(calledUpIndex >= 0) //check if sender is in list
       state.pointOuts.splice(calledUpIndex, 1)
 }
 
