@@ -37,6 +37,7 @@ webrtc.on('status', info => {
 
 webrtc.on('chat', msg => {
   state.chat.push(msg)
+  sendCallUpInfo(state.pointOuts[0])
 })
 
 webrtc.on('whiteboard', ({ action }) => {
@@ -65,7 +66,7 @@ webrtc.on('call_up', callUp => {
 
   // checks if I am the called up user
   if(webrtc.io.id == callUp.calledUpId){
-    //TODO give to chat
+    callUp()
   }
 })
 
