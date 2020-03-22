@@ -61,7 +61,7 @@ webrtc.on('call_up', callUp => {
   console.log("DEBUG on.call_up")
   const calledUpIndex = state.pointOuts.indexOf(callUp.calledUp)
 
-  if(calledUpIndex >= 0) //check if sender is in list
+  if(calledUpIndex >= 0) //check if called up is in list
     state.pointOuts.splice(calledUpIndex, 1)
 
   // checks if I am the called up user
