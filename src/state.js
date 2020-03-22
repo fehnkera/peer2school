@@ -152,6 +152,23 @@ export function sendPointOutInfo(pointsOutInfo) {
     if(senderIndex >= 0) //check if sender is in list
       state.pointOuts.splice(senderIndex, 1)
   }
+}
+
+export function sendCallUpInfo(calledUpId) {
+
+  if(teacher){
+    // remote
+    webrtc.send('call_up', {
+      calledUp: calledUpId,
+    })
+
+    
+    // local
+    const calledUpIndex = state.pointOuts.indexOf(calledUpId)
+
+    if(senderIndex >= 0) //check if sender is in list
+      state.pointOuts.splice(calledUpIndex, 1)
+}
 
 }
 
