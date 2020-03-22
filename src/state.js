@@ -66,6 +66,7 @@ webrtc.on('call_up', callUp => {
 
   // checks if I am the called up user
   if(webrtc.io.id == callUp.calledUpId){
+    //TODO give to chat
     callUp()
   }
 })

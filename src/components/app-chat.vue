@@ -70,7 +70,6 @@ export default {
       let pic = this.$refs.pointPic
       pic.style.backgroundColor = ""
       this.pointsOut = false
-
     },
   },
   async mounted() {
